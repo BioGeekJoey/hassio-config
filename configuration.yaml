@@ -62,6 +62,9 @@ http:
     - 192.168.178.0/24
     - 10.8.0.0/24
     - 172.16.0.0/12
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 192.167.178.0/24
 
 panel_iframe:
   configuratorinator:
@@ -207,6 +210,26 @@ sensor:
   # - platform: rflink
   #   automatic_add: false
   #   devices:
+
+  - platform: systemmonitor
+    resources:
+      - type: memory_use_percent
+      - type: load_1m
+      - type: load_5m
+      - type: load_15m
+      - type: ipv4_address
+        arg: eth0
+      - type: processor_use
+      - type: last_boot
+
+  - platform: travisci
+    api_key: !secret travissensortoken
+
+  - platform: speedtest
+    monitored_conditions:
+      - ping
+      - download
+      - upload
 
 # # # # # # # # # # # # # #
 #      binary sensors     #
