@@ -1,0 +1,118 @@
+- id: '1544876381098'
+  alias: HA start-up
+  trigger:
+  - event: start
+    platform: homeassistant
+  action:
+  - data:
+      payload: '1'
+      topic: cmnd/sonoffs/SetOption19
+    service: mqtt.publish
+  - data:
+      payload: ''
+      topic: cmnd/sonoffs/state
+    service: mqtt.publish
+  - data:
+      payload: update
+      topic: shellies/command
+    service: mqtt.publish
+- id: '1544876382558'
+  alias: veranda timer
+  trigger:
+  - event: sunset
+    offset: -01:00:00
+    platform: sun
+  condition: []
+  action:
+  - data:
+      entity_id: light.veranda
+    service: light.turn_on
+- id: '1545676157598'
+  alias: deurbel > tv woonkamer
+  trigger:
+  - entity_id: switch.deurbelgang_2
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data:
+      data:
+        color: pink
+        duration: 2
+        fontsize: max
+        interrupt: 'false'
+        position: top-right
+        transparency: 20%
+      message: Er staat iemand voor de deur
+      title: DEURBEL!
+    service: notify.woonkamer
+  - data:
+      data:
+        color: amber
+        duration: 5
+        fontsize: max
+        interrupt: 'false'
+        position: top-right
+        transparency: 20%
+      message: Er staat iemand voor de deur
+      title: DEURBEL!
+    service: notify.woonkamer
+- id: '1545676844319'
+  alias: laptop > monitor
+  trigger:
+  - entity_id: switch.docking_zolder
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data:
+      entity_id: switch.monitor_zolder
+    service: switch.turn_on
+- id: '1546005000106'
+  alias: deurbel > zolder
+  trigger:
+  - entity_id: switch.deurbelgang_2
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data:
+      entity_id: light.spotjes_zolder
+    service: light.toggle
+  - delay: 00:00:01
+  - data:
+      entity_id: light.spotjes_zolder
+    service: light.toggle
+  - delay: 00:00:01
+  - data:
+      entity_id: light.spotjes_zolder
+    service: light.toggle
+  - delay: 00:00:01
+  - data:
+      entity_id: light.spotjes_zolder
+    service: light.toggle
+- id: '1546693556365'
+  alias: zolder off / spotjes zolder / not home
+  trigger:
+  - entity_id: light.spotjes_zolder
+    from: 'on'
+    platform: state
+    to: 'off'
+  - entity_id: light.spotjes_washok
+    from: 'on'
+    platform: state
+    to: 'off'
+  condition:
+  - condition: state
+    entity_id: device_tracker.joel_1
+    state: not_home
+  action:
+  - data:
+      entity_id:
+      - light.ledzoldermonitor_2
+      - light.ledzolderplafond_2
+      - light.spotjes_zolder
+    service: light.turn_off

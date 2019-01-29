@@ -1,0 +1,94 @@
+sensor.yr_symbol:
+  friendly_name: weer
+sun.sun:
+  friendly_name: zon
+sensor.alectov4_52ea_hum:
+  friendly_name: zolder
+sensor.alectov4_52ea_temp:
+  friendly_name: zolder
+switch.newkaku_0174cb3e_2:
+  icon: mdi:fan
+switch.ab400d_4b_3:
+  icon: mdi:music-circle
+switch.ventilator_zolder:
+  icon: mdi:fan
+weather.br_unknown_station:
+  friendly_name: Arnhem
+switch.jukebox:
+  icon: mdi:music-circle
+switch.monitor_zolder:
+  icon: mdi:power-plug
+light.monitor_zolder:
+  icon: mdi:led-off
+light.zolder_2:
+  friendly_name: plafond led zolder
+  icon: mdi:led-off
+camera.iss:
+  hidden: true
+sensor.arnhem_irradiance:
+  friendly_name: zonnestraling
+sensor.arnhem_wind_force:
+  friendly_name: windkracht
+sensor.arnhem_symbol:
+  friendly_name: weer
+sensor.arnhem_temperature:
+  friendly_name: temperatuur
+group.zolder_klimaat: {}
+sensor.ups_battery:
+  friendly_name: UPS batterij
+sensor.ups_date_and_time:
+  friendly_name: UPS laatst actief
+sensor.ups_transfer_from_battery:
+  friendly_name: UPS laatst actief
+sensor.ups_status:
+  friendly_name: UPS status
+sensor.ups_load:
+  friendly_name: UPS belasting
+sensor.ups_input_voltage:
+  friendly_name: UPS voltage in
+sensor.arnhem_precipitation_forecast_average:
+  friendly_name: regen verwacht binnen 1 uur
+sensor.ups_wattage:
+  friendly_name: UPS wattage
+  icon: mdi:power
+sensor.arnhem_rainchance_1d:
+  friendly_name: kans op regen
+sensor.arnhem_rainchance_2d:
+  friendly_name: kans op regen
+sensor.arnhem_rainchance_3d:
+  friendly_name: kans op regen
+sensor.arnhem_symbol_1d:
+  friendly_name: weer vandaag
+sensor.arnhem_symbol_2d:
+  friendly_name: weer morgen
+sensor.arnhem_symbol_3d:
+  friendly_name: weer overmorgen
+sensor.arnhem_temperature_1d:
+  friendly_name: temperatuur vandaag
+sensor.arnhem_temperature_2d:
+  friendly_name: temperatuur morgen
+sensor.arnhem_temperature_3d:
+  friendly_name: temperatuur overmorgen
+sensor.postnl:
+  unit_of_measurement: pakket(ten)
+switch.sonoff3:
+  friendly_name: deurbel
+climate.toon_thermostat:
+  friendly_name: toon
+switch.docking_zolder:
+  friendly_name: laptop docking
+  icon: mdi:laptop
+light.ledzoldermonitor:
+  hidden: true
+light.ledzolderplafond:
+  hidden: true
+switch.deurbelgang:
+  hidden: true
+light.trap_woonkamer:
+  friendly_name: trap
+device_tracker.ab_2: {}
+device_tracker.joel_1:
+  entity_picture: /local/joel.jpg
+switch.tv_zolder:
+  friendly_name: televisie zolder
+  icon: mdi:television

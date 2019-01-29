@@ -1,0 +1,31 @@
+esphomeyaml:
+  name: sensortester
+  platform: ESP8266
+  board: d1_mini
+
+wifi:
+  ssid: !secret ssid
+  password: !secret password
+  manual_ip:
+    static_ip: 192.168.178.238
+    gateway: 192.168.178.1
+    subnet: 255.255.255.0
+
+logger:
+
+api:
+
+ota:
+
+uart:
+  rx_pin: D3
+  tx_pin: D4
+  baud_rate: 9600
+
+sensor:
+  - platform: mhz19
+    co2:
+      name: "MH-Z19 CO2 Value"
+    temperature:
+      name: "MH-Z19 Temperature"
+    update_interval: 15s

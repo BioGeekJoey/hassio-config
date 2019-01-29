@@ -1,0 +1,233 @@
+# # # # # # # # # # # # # #
+#        Hardware         #
+# # # # # # # # # # # # # #
+
+rflink:
+  port: /dev/ttyACM0
+  ignore_devices:
+  - newkaku_00bb8f36*
+  - tristate_088aaa*
+  - bft_1003c*
+  - doorbell_00011c4e*
+  - brelmotor_2f00ab*
+  - chuango_5d80*
+  - chuango_0696*
+  - chuango_bc6f*
+  - selectplus_034b*
+
+# apcupsd:
+#   host: 192.168.178.251
+
+climate:
+  - platform: toon
+    name: Toon Thermostaat
+    host: 192.168.178.12
+    port: 10080
+    scan_interval: 60
+
+device_tracker:
+  - platform: upc_connect
+    host: 192.168.178.1 
+
+# # # # # # # # # # # # # #
+#           UI            #
+# # # # # # # # # # # # # #  
+
+weather:
+  - platform: darksky
+    api_key: !secret darksky
+
+# # # # # # # # # # # # # #
+#         System          #
+# # # # # # # # # # # # # #
+
+homeassistant:
+  latitude: !secret lat
+  longitude: !secret long
+  elevation: 17
+  unit_system: metric
+  time_zone: CET
+  customize: !include customize.yaml
+
+frontend:
+  extra_html_url:
+    - /local/icons/hass-fontawesome-solid.html
+    - /local/icons/hass-fontawesome-brands.html
+
+http:
+  base_url: !secret base_url
+  ip_ban_enabled:  true
+  login_attempts_threshold: 5
+  trusted_networks:
+    - 192.168.178.0/24
+    - 10.8.0.0/24
+    - 172.16.0.0/12
+
+panel_iframe:
+  configuratorinator:
+    title: Configurator
+    icon: mdi:cogs
+    url: !secret hassconf
+
+  esphome:
+    title: ESPHome
+    icon: mdi:memory
+    url: !secret esphome
+
+  influxdb:
+    title: InfluxDB
+    icon: mdi:chart-areaspline
+    url: !secret influxdburl
+
+notify:
+  - name: hass html5
+    platform: html5
+    gcm_api_key: !secret htmlkey
+    gcm_sender_id: !secret htmlsenderid
+  - name: woonkamer
+    platform: nfandroidtv
+    host: 192.168.178.38
+
+cloud:
+  google_actions:
+    filter:
+      exclude_domains:
+        - group
+        - automation
+        - input_boolean
+        - media_player
+        - script
+
+owntracks:
+  max_gps_accuracy: 1000
+  waypoints: false
+  mqtt_topic: "owntracks/#"
+  events_only: false
+
+zone:
+  - name: home
+    latitude: !secret lat
+    longitude: !secret long
+    radius: 300
+  - name: stadhuis
+    latitude: 51.979300
+    longitude: 5.911894
+    radius: 300
+
+discovery:
+
+history:
+
+config:
+
+updater:
+  include_used_components: true
+
+conversation:
+
+tts:
+  - platform: google
+
+weblink:
+  entities:
+    - name: Home Assistant Webpage
+      url: https://home-assistant.io/
+      icon: mdi:home-assistant
+
+sun:
+
+# # # # # # # # # # # # # #
+#         switches        #
+# # # # # # # # # # # # # #
+
+switch:
+  - platform: rflink
+    device_defaults:
+      signal_repetitions: 1
+    devices:
+      ab400d_4b_3:
+        name: 'jukebox'
+      # newkaku_0174cb3e_1:
+      newkaku_0174cb3e_2:
+        name: 'ventilator zolder'
+      # newkaku_0174cb3e_3:
+      newkaku_01e9cb26_1:
+        name: 'docking zolder'
+      newkaku_01e9cb26_2:
+        name: 'monitor zolder'
+      newkaku_01e9cb26_3:
+        name: 'tv zolder'
+      # newkaku_01e01e46_1:
+      # newkaku_01e01e46_2:
+      # newkaku_01e01e46_3:
+
+# # # # # # # # # # # # # #
+#          lights         #
+# # # # # # # # # # # # # #
+
+light:
+  - platform: rflink
+    devices:
+      ab400d_4b_1:
+        name: "openhaard"
+      ab400d_4b_2:
+        name: "trap woonkamer"
+      newkaku_0174cb3e_3:
+        name: "zolder"
+      unitec_c232_01:
+        name: "veranda"
+
+  - platform: mqtt
+    name: "spotjes washok"
+    state_topic: "shellies/shelly1-2285F5/relay/0"
+    command_topic: "shellies/shelly1-2285F5/relay/0/command"
+    payload_on: "on"
+    payload_off: "off"
+    # availability_topic: "shellies/shelly1-2285f5/online"
+    # payload_available: "true"
+    # payload_not_available: "false"
+    retain: false
+
+  - platform: mqtt
+    name: "spotjes zolder"
+    state_topic: "shellies/shelly1-227968/relay/0"
+    command_topic: "shellies/shelly1-227968/relay/0/command"
+    payload_on: "on"
+    payload_off: "off"
+    # availability_topic: "shellies/shelly1-227968/online"
+    # payload_available: "true"
+    # payload_not_available: "false"
+    retain: false
+
+# # # # # # # # # # # # # #
+#         sensors         #
+# # # # # # # # # # # # # #
+
+sensor:
+  # - platform: rflink
+  #   automatic_add: false
+  #   devices:
+
+# # # # # # # # # # # # # #
+#      binary sensors     #
+# # # # # # # # # # # # # #
+
+binary_sensor:
+
+# # # # # # # # # # # # # #
+#          groups         #
+# # # # # # # # # # # # # #
+
+group: !include groups.yaml
+
+# # # # # # # # # # # # # #
+#        automation       #
+# # # # # # # # # # # # # #
+
+automation: !include automations.yaml
+
+# # # # # # # # # # # # # #
+#         scripts         #
+# # # # # # # # # # # # # #
+
+script:

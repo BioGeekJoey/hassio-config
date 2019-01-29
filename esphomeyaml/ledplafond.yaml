@@ -1,0 +1,41 @@
+esphomeyaml:
+  name: ledzolder
+  platform: ESP8266
+  board: esp01_1m
+  board_flash_mode: dout
+
+wifi:
+  ssid: !secret ssid
+  password: !secret password
+  manual_ip:
+    static_ip: 192.168.178.232
+    gateway: 192.168.178.1
+    subnet: 255.255.255.0
+  
+
+logger:
+
+ota:
+
+api:
+
+output:
+  - platform: esp8266_pwm
+    pin: GPIO14
+    frequency: 2000 Hz
+    id: red
+  - platform: esp8266_pwm
+    pin: GPIO12
+    frequency: 2000 Hz
+    id: green
+  - platform: esp8266_pwm
+    pin: GPIO13
+    frequency: 2000 Hz
+    id: blue
+
+light:
+  - platform: rgb
+    name: "Plafond verlichting"
+    red: red
+    green: green
+    blue: blue

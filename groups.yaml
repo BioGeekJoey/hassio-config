@@ -1,0 +1,79 @@
+woonkamer_view:
+  view: yes
+  name: woonkamer
+  entities:
+    - group.woonkamer
+    - group.wie_thuis
+    - weather.dark_sky
+    - media_player.55pus750312
+
+
+zolder_view:
+  view: yes
+  name: zolder
+  entities:
+    - group.zolder
+    - group.washok
+    - group.klimaat
+    - group.ups_status
+    - weather.dark_sky
+    - media_player.googlehome0158
+    - media_player.joels_chromecast
+
+nick_view:
+  view: yes
+  name: nick
+  entities:
+    - light.nick_verlichting
+
+woonkamer:
+  name: woonkamer
+  entities:
+    - light.openhaard
+    - light.trap_woonkamer
+    - light.veranda
+    - switch.jukebox
+    - climate.toon_thermostat
+
+wie_thuis:
+  name: wie zijn er thuis
+  entities:
+    - device_tracker.ab_2
+    - device_tracker.esther_3
+    - device_tracker.joel_1
+
+
+
+zolder:
+  name: zolder
+  entities:
+    - light.plafond_verlichting
+    - light.bureau_verlichting
+    - light.spotjes_zolder
+    - switch.docking_zolder
+    - switch.monitor_zolder
+    - switch.ventilator_zolder
+    - switch.tv_zolder
+
+washok:
+  name: washok
+  entities:
+    - light.spotjes_washok
+
+klimaat:
+  name: klimaat
+  entities:
+    - sensor.bme280_temperature
+    - sensor.bme680_temperature
+    - sensor.bme280_humidity
+    - sensor.bme680_humidity
+    - sensor.bme280_pressure
+    - sensor.bme680_gas_resistance
+
+ups_status:
+  name: backup accu status
+  entities:
+    - sensor.nut_ups_battery_runtime
+    - sensor.nut_ups_input_voltage
+    - sensor.nut_ups_load
+    - sensor.nut_ups_self_test_result

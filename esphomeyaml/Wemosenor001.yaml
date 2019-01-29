@@ -1,0 +1,48 @@
+esphomeyaml:
+  name: wemosenor001
+  platform: ESP8266
+  board: d1_mini
+
+wifi:
+  ssid: !secret ssid
+  password: !secret password
+  manual_ip:
+    static_ip: 192.168.178.236
+    gateway: 192.168.178.1
+    subnet: 255.255.255.0
+
+logger:
+
+api:
+
+ota:
+
+i2c:
+
+sensor:
+  - platform: bme680
+    temperature:
+      name: "BME680 Temperature"
+      oversampling: 8x
+    pressure:
+      name: "BME680 Pressure"
+      oversampling: 8x
+    humidity:
+      name: "BME680 Humidity"
+      oversampling: 8x
+    gas_resistance:
+      name: "BME680 Gas Resistance"
+    address: 0x77
+    update_interval: 3s
+  - platform: bme280
+    temperature:
+      name: "BME280 Temperature"
+      oversampling: 8x
+    pressure:
+      name: "BME280 Pressure"
+      oversampling: 8x
+    humidity:
+      name: "BME280 Humidity"
+      oversampling: 8x
+    address: 0x76
+    update_interval: 15s
